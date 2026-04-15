@@ -1,5 +1,5 @@
 {
-    "name": "beancount/php-parser",
+    "name": "guiu-rocafort/beancount-php-parser",
     "version": "1.0.0",
     "description": "PHP library for parsing Beancount double-entry bookkeeping files",
     "type": "library",
