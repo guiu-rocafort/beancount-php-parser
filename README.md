@@ -2,6 +2,7 @@
 
 [![Tests](https://github.com/guiu-rocafort/beancount-php-parser/actions/workflows/tests.yml/badge.svg)](https://github.com/guiu-rocafort/beancount-php-parser/actions/workflows/tests.yml)
 [![Static Analysis](https://github.com/guiu-rocafort/beancount-php-parser/actions/workflows/phpstan.yml/badge.svg)](https://github.com/guiu-rocafort/beancount-php-parser/actions/workflows/phpstan.yml)
+[![Documentation](https://github.com/guiu-rocafort/beancount-php-parser/actions/workflows/documentation.yml/badge.svg)](https://guiu-rocafort.github.io/beancount-php-parser/)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 A lightweight, high-performance PHP library for parsing [Beancount](https://beancount.github.io/) double-entry bookkeeping files.
