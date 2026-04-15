@@ -1,7 +1,7 @@
 # Beancount PHP Parser
 
 [![Tests](https://github.com/beancount/php-parser/workflows/Tests/badge.svg)](https://github.com/beancount/php-parser/actions)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 A lightweight, high-performance PHP library for parsing [Beancount](https://beancount.github.io/) double-entry bookkeeping files.
 
@@ -143,4 +143,4 @@ src/
 
 ## License
 
-MIT License - see [LICENSE](LICENSE) file for details.
+GPLv3 License - see [LICENSE](LICENSE) file for details.
