@@ -1,6 +1,6 @@
 # Beancount PHP Parser
 
-[![Tests](https://github.com/guiu-rocafort/beancount-php-parser/workflows/Tests/badge.svg)](https://github.com/guiu-rocafort/beancount-php-parser/actions)
+[![Tests](https://github.com/guiu-rocafort/beancount-php-parser/actions/workflows/tests.yml/badge.svg)](https://github.com/guiu-rocafort/beancount-php-parser/actions/workflows/tests.yml)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 A lightweight, high-performance PHP library for parsing [Beancount](https://beancount.github.io/) double-entry bookkeeping files.
