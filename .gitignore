@@ -1,0 +1,22 @@
+# PHP
+/vendor/
+composer.phar
+.phpunit.result.cache
+.phpunit.cache
+phpunit.xml~
+
+# IDE
+/.idea/
+/.vscode/
+*.swp
+*.swo
+
+# OS
+/.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Documentation
+/docs/

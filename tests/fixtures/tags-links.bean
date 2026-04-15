@@ -1,0 +1,68 @@
+; Tags, Links, and Metadata Beancount File
+; Testing #tags, ^links, and key:value metadata
+
+2014-01-01 open Assets:US:BofA:Checking USD
+2014-01-01 open Assets:US:BofA:Savings USD
+2014-01-01 open Liabilities:CreditCard:CapitalOne USD
+2014-01-01 open Expenses:Flights
+2014-01-01 open Expenses:Hotel
+2014-01-01 open Expenses:Restaurant
+2014-01-01 open Income:US:Salary
+2014-01-01 open Assets:AccountsReceivable
+
+; Transaction with single tag
+2014-04-23 * "Flight to Berlin" #berlin-trip-2014
+  Expenses:Flights  -1230.27 USD
+  Liabilities:CreditCard:CapitalOne  1230.27 USD
+
+; Transaction with multiple tags
+2014-04-24 * "Hotel in Berlin" #berlin-trip-2014 #germany
+  Expenses:Hotel  -450.00 EUR @ 1.32 USD
+  Liabilities:CreditCard:CapitalOne  594.00 USD
+
+; Transaction with link for invoice tracking
+2014-02-05 * "Invoice for January" ^invoice-pepe-studios-jan14
+  Income:Clients:PepeStudios  -8450.00 USD
+  Assets:AccountsReceivable  8450.00 USD
+
+; Payment linked to invoice
+2014-02-20 * "Check deposit - payment from Pepe" ^invoice-pepe-studios-jan14
+  Assets:US:BofA:Checking  8450.00 USD
+  Assets:AccountsReceivable  -8450.00 USD
+
+; Multiple links for a wire transfer series
+2014-02-05 * "Moving money to Isle of Man" ^transfers-offshore-17
+  Assets:US:BofA:Savings  -40000.00 USD
+  Assets:US:BofA:Checking  40000.00 USD
+
+2014-02-09 * "Wire to FX broker" ^transfers-offshore-17
+  Assets:US:BofA:Checking  -40025.00 USD
+  Expenses:Fees:WireTransfers  25.00 USD
+  Assets:OANDA:USDollar  40000.00
+
+2014-03-16 * "Conversion to offshore beans" ^transfers-offshore-17
+  Assets:OANDA:USDollar  -40000.00 USD
+  Assets:OANDA:GBPounds  23391.81 GBP @ 1.71 USD
+
+; Transaction with metadata
+2014-05-01 * "Business dinner"
+  Liabilities:CreditCard:CapitalOne  -120.00 USD
+  Expenses:Restaurant  120.00 USD
+  venue: "The Capital Grille"
+  attendees: "John, Jane"
+
+; Transaction metadata on posting
+2014-05-15 * "Conference registration"
+  Liabilities:CreditCard:CapitalOne  -500.00 USD
+  Expenses:Professional  500.00 USD
+  conference: "PHPConf 2014"
+
+; Tag stack pushtag/poptag
+pushtag #europe-trip-2014
+2014-06-01 * "Flight to Paris"
+  Expenses:Flights  -800.00 USD
+  Liabilities:CreditCard:CapitalOne  800.00 USD
+2014-06-02 * "Dinner in Paris"
+  Expenses:Restaurant  -150.00 EUR
+  Liabilities:CreditCard:CapitalOne  198.00 USD
+poptag #europe-trip-2014

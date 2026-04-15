@@ -1,0 +1,116 @@
+; Complex Beancount File
+; Testing full features combined
+
+; ----- OPTIONS -----
+option "operating_currency" "USD"
+option "year_end" "December"
+
+; ----- ACCOUNTS -----
+2014-01-01 open Assets:US:BofA:Checking USD
+2014-01-01 open Assets:US:BofA:Savings USD
+2014-01-01 open Assets:US:Vanguard:Cash USD
+2014-01-01 open Assets:US:Vanguard:IVV
+2014-01-01 open Liabilities:CreditCard:CapitalOne USD
+2014-01-01 open Income:US:Acme:Salary
+2014-01-01 open Income:Investments:Dividends
+2014-01-01 open Income:ETrade:CapitalGains
+2014-01-01 open Expenses:Food:Groceries
+2014-01-01 open Expenses:Food:Restaurant
+2014-01-01 open Expenses:Utilities
+2014-01-01 open Expenses:Flights
+2014-01-01 open Expenses:Professional
+2014-01-01 open Expenses:Taxes:Federal
+2014-01-01 open Expenses:Taxes:State
+
+; ----- NOTE DIRECTIVE -----
+2014-01-01 note Assets:US:BofA:Checking "Primary checking account for payroll"
+2014-01-01 note Liabilities:CreditCard:CapitalOne "Used for日常 expenses"
+
+; ----- EVENT DIRECTIVE -----
+2014-03-15 event "location" "Moved to new apartment"
+2014-06-01 event "status" "Started new job"
+
+; ----- COMMODITY DIRECTIVE -----
+2014-01-01 commodity IVV
+  name: "iShares Core S&P 500 ETF"
+  asset-class: "stock"
+
+; ----- INITIAL TRANSACTIONS -----
+
+; Salary deposit with payee
+2014-01-15 * "Acme Corp" "Bi-monthly salary"
+  Assets:US:BofA:Checking  5000.00 USD
+  Income:US:Acme:Salary  -5000.00 USD
+
+; Initial stock purchase with cost basis
+2014-01-20 * "Start investing"
+  Assets:US:Vanguard:Cash  -3000.00 USD
+  Assets:US:Vanguard:IVV  15 IVV {200.00 USD}
+  Expenses:Investments  3000.00 USD
+
+; ----- DAILY TRANSACTIONS -----
+
+; Groceries
+2014-02-01 * "Whole Foods"
+  Assets:US:BofA:Checking  -85.50 USD
+  Expenses:Food:Groceries  85.50 USD
+
+; Restaurant with payee and narration
+2014-02-05 * "The French Laundry" "Anniversary dinner"
+  Liabilities:CreditCard:CapitalOne  -250.00 USD
+  Expenses:Food:Restaurant  250.00 USD
+
+; Utilities
+2014-02-10 note Assets:US:BofA:Checking "Paid rent"
+  Assets:US:BofA:Checking  -1500.00 USD
+  Expenses:Utilities  1500.00 USD
+2014-02-10 * "Electric bill"
+  Assets:US:BofA:Checking  -120.00 USD
+  Expenses:Utilities  120.00 USD
+
+; Wire transfer with price (@ conversion)
+2014-02-15 * "Transfer to savings account"
+  Assets:US:BofA:Checking  -1000.00 USD
+  Assets:US:BofA:Savings  1000.00 USD
+
+; Transaction with tags
+2014-03-01 * "Conference trip" #business #march-2014
+  Expenses:Flights  -800.00 USD
+  Expenses:Professional  -200.00 USD
+  Liabilities:CreditCard:CapitalOne  1000.00 USD
+
+; Transaction with links
+2014-03-10 * "Invoice from client" ^invoice-001
+  Income:Clients:TechCorp  -5000.00 USD
+  Assets:AccountsReceivable  5000.00 USD
+2014-03-15 * "Received payment" ^invoice-001
+  Assets:US:BofA:Checking  5000.00 USD
+  Assets:AccountsReceivable  -5000.00 USD
+
+; Stock sale with cost and price
+2014-04-01 * "Sold some shares"
+  Assets:US:Vanguard:IVV  -5 IVV {200.00 USD} @ 210.00 USD
+  Assets:US:Vanguard:Cash  1050.00 USD
+  Income:ETrade:CapitalGains  -50.00 USD
+
+; Balance assertions
+2014-04-01 balance Assets:US:BofA:Checking  1914.50 USD
+2014-04-01 balance Assets:US:Vanguard:IVV  10 IVV
+
+; PAD directive for automatic balancing
+2014-04-15 pad Assets:US:BofA:Checking Equity:OpeningBalances
+
+; Dividend income (no cost)
+2014-05-01 * "Quarterly dividend"
+  Assets:US:Vanguard:Cash  25.00 USD
+  Income:Investments:Dividends  -25.00 USD
+
+; Price directive
+2014-05-01 price IVV 210.00 USD
+2014-05-01 price EUR 1.12 USD
+
+; Note directive
+2014-06-01 note Expenses:Professional "Annual subscriptions renewal"
+
+; ----- END -----
+; End of complex test file

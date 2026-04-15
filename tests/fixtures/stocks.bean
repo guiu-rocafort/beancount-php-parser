@@ -1,0 +1,46 @@
+; Stock Trading Beancount File
+; Testing cost basis with {cost} syntax
+
+2014-01-01 open Assets:ETrade IVV
+2014-01-01 open Assets:ETrade:Cash USD
+2014-01-01 open Income:ETrade:CapitalGains
+2014-01-01 open Expenses:Commissions
+
+; Buy 10 shares of S&P 500 at $183.07 per share
+2014-02-11 * "Bought shares of S&P 500"
+  Assets:ETrade:IVV  10 IVV {183.07 USD}
+  Assets:ETrade:Cash  -1830.70 USD
+
+; Buy additional 15 shares at different price
+2014-03-22 * "Bought more S&P 500"
+  Assets:ETrade:IVV  15 IVV {187.12 USD}
+  Assets:ETrade:Cash  -2806.80 USD
+
+; Sell shares with explicit cost - 10 shares from first lot
+2014-05-01 * "Sold shares of S&P 500"
+  Assets:ETrade:IVV  -10 IVV {183.07 USD}
+  Assets:ETrade:Cash  1979.00 USD
+  Income:ETrade:CapitalGains  -148.30 USD
+
+; Sell shares using date match
+2014-05-15 * "Sold by date"
+  Assets:ETrade:IVV  -15 IVV {2014-03-22}
+  Assets:ETrade:Cash  2925.00 USD
+  Income:ETrade:CapitalGains  -118.20 USD
+
+; Buy with reference label
+2014-06-01 * "Bought with ref"
+  Assets:ETrade:IVV  20 IVV {190.00 USD, "ref-001"}
+  Assets:ETrade:Cash  -3800.00 USD
+
+; Sell using reference label
+2014-06-15 * "Sold by reference"
+  Assets:ETrade:IVV  -20 IVV {"ref-001"}
+  Assets:ETrade:Cash  4000.00 USD
+  Income:ETrade:CapitalGains  -200.00 USD
+
+; Cost with price for generating price entry
+2014-07-11 * "Sold with price entry"
+  Assets:ETrade:IVV  -10 IVV {183.07 USD} @ 197.90 USD
+  Assets:ETrade:Cash  1979.00 USD
+  Income:ETrade:CapitalGains  -148.30 USD

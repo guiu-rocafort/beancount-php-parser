@@ -1,0 +1,33 @@
+; Simple Beancount File
+; Basic transactions for testing parser
+
+2014-01-01 open Assets:US:BofA:Checking
+2014-01-01 open Assets:US:BofA:Savings
+2014-01-01 open Income:US:Acme:Salary
+2014-01-01 open Expenses:Food:Groceries
+2014-01-01 open Expenses:Taxes
+
+; Opening balance
+2014-01-01 * "Initial deposit"
+  Assets:US:BofA:Checking  1000.00 USD
+  Income:US:Acme:Salary  -1000.00 USD
+
+; Weekly groceries
+2014-01-15 * "Whole Foods" "Weekly groceries"
+  Assets:US:BofA:Checking  -75.50 USD
+  Expenses:Food:Groceries  75.50 USD
+
+; Savings transfer
+2014-01-20 * "Transfer to savings"
+  Assets:US:BofA:Checking  -200.00 USD
+  Assets:US:BofA:Savings  200.00 USD
+
+; Salary deposit
+2014-02-01 * "Acme Corp" "Bi-monthly salary"
+  Assets:US:BofA:Checking  3000.00 USD
+  Income:US:Acme:Salary  -3000.00 USD
+
+; Taxes
+2014-02-01 * "Federal taxes"
+  Assets:US:BofA:Checking  -500.00 USD
+  Expenses:Taxes  500.00 USD

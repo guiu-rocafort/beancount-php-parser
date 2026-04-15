@@ -1,0 +1,40 @@
+; Open/Close Account Beancount File
+; Testing open and close directives
+
+2013-01-01 open Assets:US:BofA:Checking USD
+2013-01-01 open Assets:US:BofA:Savings USD
+2013-01-01 open Liabilities:CreditCard:CapitalOne USD
+2013-01-01 open Income:US:Salary
+2013-01-01 open Expenses:Restaurant
+2013-01-01 open Expenses:Groceries
+
+; First use of checking
+2013-01-15 * "Initial deposit"
+  Assets:US:BofA:Checking  2000.00 USD
+  Income:US:Salary  -2000.00 USD
+
+; Using credit card
+2013-02-01 * "Restaurant dinner"
+  Liabilities:CreditCard:CapitalOne  -75.00 USD
+  Expenses:Restaurant  75.00 USD
+
+; Close credit card after fraud
+2014-11-28 close Liabilities:CreditCard:CapitalOne
+
+; New credit card account opened later
+2015-01-01 open Liabilities:CreditCard:Chase USD
+
+; Open with currency constraint
+2015-01-01 open Assets:Investments Brokerage USD
+
+; Open with booking method
+2015-01-01 open Assets:Investments:Old  USD "STRICT"
+
+; Open with multiple currencies
+2015-01-01 open Assets:MultiCurrency USD, EUR, CAD
+
+; Open with NONE booking method for flexible matching
+2015-01-01 open Liabilities:CreditCard:Flexible  USD, EUR "NONE"
+
+; Close an old account
+2015-06-30 close Assets:Investments:Old

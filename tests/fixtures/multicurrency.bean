@@ -1,0 +1,41 @@
+; Multi-currency Beancount File
+; Testing currency conversion with @ and @@
+
+2014-01-01 open Assets:US:BofA:Checking USD
+2014-01-01 open Assets:FR:SocGen:Checking EUR
+2014-01-01 open Assets:US:Vanguard:Cash USD
+2014-01-01 open Liabilities:CreditCard:CapitalOne USD
+2014-01-01 open Income:US:Salary
+2014-01-01 open Expenses:Travel
+
+; Simple USD transaction
+2014-02-01 * "Grocery store"
+  Assets:US:BofA:Checking  -50.00 USD
+  Expenses:Food:Groceries  50.00 USD
+
+; Currency conversion with per-unit price (@)
+; Convert 400 USD to CAD at 1.09 rate
+2014-02-03 * "Transfer to account in Canada"
+  Assets:US:BofA:Checking  -400.00 USD @ 1.09 CAD
+  Assets:FR:SocGen:Checking  436.00 CAD
+
+; Currency conversion with total price (@@)
+; Convert 500 USD to EUR at total 365 EUR
+2014-02-05 * "Transfer to France"
+  Assets:US:BofA:Checking  -500.00 USD @@ 365.00 EUR
+  Assets:FR:SocGen:Checking  365.00 EUR
+
+; Stock purchase in USD showing cost basis
+2014-02-10 * "US stocks purchase"
+  Assets:US:Vanguard:Cash  -5000.00 USD
+  Assets:US:Vanguard:IVV  25 IVV {200.00 USD}
+  Expenses:Investments  5000.00 USD
+
+; Credit card in USD
+2014-02-15 * "Amazon purchase"
+  Liabilities:CreditCard:CapitalOne  -76.00 USD
+  Expenses:Shopping  76.00 USD
+
+; Price directive for setting currency conversion rate
+2014-03-01 price USD 1.09 CAD
+2014-03-01 price USD 0.73 EUR

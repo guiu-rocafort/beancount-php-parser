@@ -1,0 +1,38 @@
+; Balance Assertions Beancount File
+; Testing balance directives
+
+2014-01-01 open Assets:US:BofA:Checking USD
+2014-01-01 open Assets:US:BofA:Savings USD
+2014-01-01 open Income:US:Salary
+
+; Initial deposit
+2014-01-05 * "Initial deposit"
+  Assets:US:BofA:Checking  1000.00 USD
+  Income:US:Salary  -1000.00 USD
+
+; Balance assertion - checking account should have 1000 USD
+2014-01-05 balance Assets:US:BofA:Checking  1000.00 USD
+
+; Another transaction
+2014-01-10 * "Deposit"
+  Assets:US:BofA:Checking  500.00 USD
+  Income:US:Salary  -500.00 USD
+
+; Balance assertion - should now have 1500 USD
+2014-01-10 balance Assets:US:BofA:Checking  1500.00 USD
+
+; Transfer to savings
+2014-01-15 * "Transfer"
+  Assets:US:BofA:Checking  -300.00 USD
+  Assets:US:BofA:Savings  300.00 USD
+
+; Balance assertion - checking should have 1200
+2014-01-15 balance Assets:US:BofA:Checking  1200.00 USD
+
+; Balance assertion - savings should have 300
+2014-01-15 balance Assets:US:BofA:Savings  300.00 USD
+
+; Multiple currencies in balance
+2014-02-01 open Assets:Multiple:Currencies USD, EUR, CAD
+
+2014-02-01 balance Assets:Multiple:Currencies 1000 USD, 500 EUR, 200 CAD

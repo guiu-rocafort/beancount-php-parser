@@ -1,0 +1,9 @@
+parameters:
+    level: 5
+    paths:
+        - src
+    excludePaths:
+        - tests
+    ignoreErrors:
+        - '#Negated boolean expression is always true#'
+        - '#If condition is always false#'
