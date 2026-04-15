@@ -1,9 +1,8 @@
 {
     "name": "guiu-rocafort/beancount-php-parser",
-    "version": "1.0.0",
     "description": "PHP library for parsing Beancount double-entry bookkeeping files",
     "type": "library",
-    "license": "GPL-3.0",
+    "license": "GPL-3.0-or-later",
     "require": {
         "php": "^8.1"
     },
